@@ -7,6 +7,7 @@ export class Film {
   year: number;
   genre: string;
   isNew: boolean;
+  trailerUrl: string;
   constructor(
     id: number,
     title: string,
@@ -15,7 +16,9 @@ export class Film {
     rating: number,
     year: number,
     genre: string,
-    isNew: boolean
+    isNew: boolean,
+    trailerUrl: string
+
   ) {
     this.id = id;
     this.title = title;
@@ -25,6 +28,7 @@ export class Film {
     this.year = year;
     this.genre = genre;
     this.isNew = isNew;
+    this.trailerUrl = trailerUrl;
   }
 }
 export const FILMS: Film[] = [
@@ -38,6 +42,7 @@ export const FILMS: Film[] = [
     year: 2008,
     genre: 'Action',
     isNew: true,
+    trailerUrl: 'https://www.youtube.com/watch?v=JerVrbLldXw',
   },
   {
     id: 2,
@@ -49,6 +54,7 @@ export const FILMS: Film[] = [
     year: 2008,
     genre: 'Action',
     isNew: false,
+    trailerUrl: 'https://www.youtube.com/watch?v=JerVrbLldXw',
   },
   {
     id: 3,
@@ -60,6 +66,7 @@ export const FILMS: Film[] = [
     year: 2008,
     genre: 'Action',
     isNew: true,
+    trailerUrl: 'https://www.youtube.com/watch?v=JerVrbLldXw',
   },
   {
     id: 4,
@@ -70,6 +77,7 @@ export const FILMS: Film[] = [
     year: 2008,
     genre: 'Action',
     isNew: true,
+    trailerUrl: 'https://www.youtube.com/watch?v=JerVrbLldXw',
   },
   {
     id: 5,
@@ -81,6 +89,7 @@ export const FILMS: Film[] = [
     year: 2008,
     genre: 'Action',
     isNew: true,
+    trailerUrl: 'https://www.youtube.com/watch?v=JerVrbLldXw',
   },
   {
     id: 6,
@@ -92,5 +101,6 @@ export const FILMS: Film[] = [
     year: 2008,
     genre: 'Action',
     isNew: false,
+    trailerUrl: 'https://www.youtube.com/watch?v=JerVrbLldXw',
   },
 ];
