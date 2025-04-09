@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'movies-list', component: MovieListComponent },
   { path: 'movie-details/:id', component: MovieDetailComponent },
+  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
   { path: '**', component: NotFoundComponent },
 ];
 
