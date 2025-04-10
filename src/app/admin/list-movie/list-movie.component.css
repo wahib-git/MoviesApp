@@ -1,0 +1,93 @@
+.films-container {
+  padding: 20px;
+  background-color: #121212;
+  color: white;
+  margin-top: 80px;
+}
+
+/* Barre de filtrage avec alignement à droite du bouton Ajouter */
+.filter-bar {
+  display: flex;
+  justify-content: space-between; /* Espace entre les éléments */
+  align-items: center; /* Alignement vertical */
+  gap: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.search-input,
+.filter-select {
+  background: #1e1e1e;
+  color: white;
+  padding: 10px;
+  border: 1px solid #444;
+  border-radius: 5px;
+}
+
+/* Bouton Ajouter film à droite */
+.add-film-btn {
+  margin-left: auto; /* Pousse le bouton vers la droite */
+}
+
+.add-btn {
+  background-color: #03dac6;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.add-btn i {
+  margin-right: 8px;
+}
+
+/* Table des films */
+.films-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.films-table th,
+.films-table td {
+  padding: 10px;
+  border-bottom: 1px solid #333;
+}
+
+.films-table th {
+  background: #1e1e1e;
+}
+
+.film-image {
+  width: 60px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+/* Liens et boutons */
+.trailer-link {
+  color: #03dac6;
+  text-decoration: none;
+}
+
+.edit-btn,
+.delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  margin-right: 5px;
+}
+
+.edit-btn i {
+  color: #03dac6;
+}
+
+.delete-btn i {
+  color: #cf6679;
+}

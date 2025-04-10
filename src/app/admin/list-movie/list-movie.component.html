@@ -1,0 +1,60 @@
+<div class="films-container">
+  <!-- Barre de filtrage avec le bouton Ajouter aligné à droite -->
+  <div class="filter-bar">
+    <input
+      type="text"
+      placeholder="Rechercher un film..."
+      class="search-input"
+    />
+    <select class="filter-select">
+      <option value="">Tous les genres</option>
+      <option>genre</option>
+    </select>
+    <select class="filter-select">
+      <option value="">Toutes les années</option>
+      <option>year</option>
+    </select>
+
+    <!-- Bouton Ajouter film aligné à droite -->
+    <div class="add-film-btn">
+      <button class="add-btn" routerLink="create">
+        <i class="fas fa-plus"></i> Ajouter un film
+      </button>
+    </div>
+  </div>
+
+  <!-- Liste des films -->
+  <table class="films-table">
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Titre</th>
+        <th>Description</th>
+        <th>Genre</th>
+        <th>Année</th>
+        <th>Note</th>
+        <th>Bande-annonce</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><img src="" alt="" class="film-image" /></td>
+        <td>film.title</td>
+        <td>film.description</td>
+        <td>film.genre</td>
+        <td>film.year</td>
+        <td>⭐ film.rating</td>
+        <td>
+          <a [href]="film.trailerUrl" target="_blank" class="trailer-link"
+            >Voir</a
+          >
+        </td>
+        <td>
+          <button class="edit-btn"><i class="fas fa-edit"></i></button>
+          <button class="delete-btn"><i class="fas fa-trash"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
