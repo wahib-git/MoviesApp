@@ -38,20 +38,20 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td><img src="" alt="" class="film-image" /></td>
-        <td>film.title</td>
-        <td>film.description</td>
-        <td>film.genre</td>
-        <td>film.year</td>
-        <td>⭐ film.rating</td>
+      <tr *ngFor="let film of films">
+        <td><img [src]="film.image" [alt]="film.title" class="film-image" /></td>
+        <td>{{film.title}}</td>
+        <td>{{film.description}}</td>
+        <td>{{film.genre}}</td>
+        <td>{{film.year}}</td>
+        <td>⭐{{film.rating}}</td>
         <td>
           <a [href]="film.trailerUrl" target="_blank" class="trailer-link"
             >Voir</a
           >
         </td>
         <td>
-          <button class="edit-btn"><i class="fas fa-edit"></i></button>
+          <button class="edit-btn" [routerLink]="['update' , film.id]"><i class="fas fa-edit"></i></button>
           <button class="delete-btn"><i class="fas fa-trash"></i></button>
         </td>
       </tr>
