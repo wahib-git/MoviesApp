@@ -9,7 +9,7 @@ export class AppService {
 
   private ROOT_URL = 'http://localhost:8080/api/v0';
   
-constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
   // Get all movies
   getAllMovies(): Observable<any> {
