@@ -11,6 +11,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 })
 export class MovieDetailComponent {
   filmId?: any;
+  //films: Film[]=[]
   films: Film[] = FILMS;
   film?: Film;
   safeTrailerUrl!: SafeResourceUrl;
