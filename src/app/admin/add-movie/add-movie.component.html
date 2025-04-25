@@ -1,21 +1,21 @@
 <div style="background-color: black; margin-top: 80px; height: 500px;">
     <div class="container">
         <h2>Ajouter un Film</h2>
-        <form  class="film-form">
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="film-form">
             <div class="form-group">
                 <label for="title">Titre du film</label>
-                <input type="text" id="title"name="title" required
+                <input type="text" id="title" name="title" formControlName="title" required
                 placeholder="Titre du film">
             </div>
 
             <div class="form-group">
                 <label for="description">Description</label>
-                <textarea id="description"  name="description" required cols="30" rows="10" placeholder="Description du film"></textarea>
+                <textarea id="description"  name="description" formControlName="description" required cols="30" rows="10" placeholder="Description du film"></textarea>
             </div>
 
             <div class="form-group">
                 <label for="genre">Genre</label>
-                <select id="genre"  name="genre" required>
+                <select id="genre"  name="genre" formControlName="genre" required>
                     <option value="Action">Action</option>
                     <option value="Comédie">Comédie</option>
                     <option value="Drame">Drame</option>
@@ -25,25 +25,30 @@
 
             <div class="form-group">
                 <label for="year">Année</label>
-                <input type="date" id="year" name="year" required>
+                <input type="date" id="year" name="year" formControlName="year" required>
             </div>
 
             <div class="form-group">
                 <label for="rating">Note</label>
-                <input type="number" id="rating"  name="rating" min="0" max="5" 
+                <input type="number" id="rating"  name="rating" formControlName="rating" min="0" max="5" 
                     required
                     placeholder="0">
             </div>
 
             <div class="form-group">
                 <label for="image">Image</label>
-                <input type="file" id="image"  name="image">
+                <input type="file" id="image" name="image" (change)="onFileChange($event)" required accept="image/*" />
             </div>
 
             <div class="form-group">
                 <label for="trailerUrl">URL de la bande-annonce</label>
-                <input type="url" id="trailerUrl"  name="trailerUrl"
+                <input type="url" id="trailerUrl"  name="trailerUrl" formControlName="trailerUrl" required
                 placeholder="Url de trailer">
+            </div>
+            <!-- a checkbox for isNew in your form-->
+            <div class="form-group">
+                <label for="isNew">Nouveau</label>
+                <input type="checkbox" id="isNew"  name="isNew" formControlName="isNew" (change)="onCheckboxChange($event)" required>
             </div>
 
             <button type="submit" class="btn-submit">Ajouter le film</button>

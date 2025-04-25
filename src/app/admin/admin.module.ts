@@ -6,7 +6,7 @@ import { AdminComponent } from './admin.component';
 import { AddMovieComponent } from './add-movie/add-movie.component';
 import { ListMovieComponent } from './list-movie/list-movie.component';
 import { UpdateMovieComponent } from './update-movie/update-movie.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,7 +19,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     AdminRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class AdminModule { }

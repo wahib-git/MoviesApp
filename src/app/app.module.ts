@@ -13,6 +13,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { SingleMovieComponent } from './single-movie/single-movie.component';
 import { AppService } from './sevices/app.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule, 
+    HttpClientModule,
+    ReactiveFormsModule 
   ],
   providers: [AppService],
   bootstrap: [AppComponent]

@@ -22,27 +22,8 @@ export class AppService {
   }
 
   // Créer un nouveau film avec image (multipart/form-data)
-  createMovie(movieData: {
-    title: string;
-    description: string;
-    genre: string;
-    rating: string;
-    year: string;
-    isNew: boolean;
-    trailerUrl: string;
-    image: File;
-  }): Observable<Film> {
-    const formData = new FormData();
-    formData.append('title', movieData.title);
-    formData.append('description', movieData.description);
-    formData.append('genre', movieData.genre);
-    formData.append('rating', movieData.rating);
-    formData.append('year', movieData.year);
-    formData.append('isNew', String(movieData.isNew));
-    formData.append('trailerUrl', movieData.trailerUrl);
-    formData.append('image', movieData.image);
-
-    return this.http.post<Film>(`${this.ROOT_URL}/movies`, formData);
+  createMovie(movieData: FormData ): Observable<Film> {
+    return this.http.post<Film>(`${this.ROOT_URL}/movies`, movieData);
   }
 
   // Mettre à jour un film existant (avec ou sans nouvelle image)
