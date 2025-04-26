@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Film, FILMS } from '../../models/film';
+import { Film} from '../../models/film';
 import { Router } from '@angular/router';
 import { AppService } from '../../sevices/app.service';
 

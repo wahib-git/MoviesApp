@@ -31,7 +31,7 @@ export class Film {
     this.trailerUrl = trailerUrl;
   }
 }
-export const FILMS: Film[] = [
+/* export const FILMS: Film[] = [
   {
     id: 1,
     title: 'Captain America',
@@ -104,3 +104,4 @@ export const FILMS: Film[] = [
     trailerUrl: 'https://www.youtube.com/watch?v=JerVrbLldXw',
   },
 ];
+ */

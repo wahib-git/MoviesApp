@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Film, FILMS } from '../models/film';
+import { Film} from '../models/film';
 
 @Component({
   selector: 'app-movie-list',
@@ -9,5 +9,5 @@ import { Film, FILMS } from '../models/film';
   styleUrl: './movie-list.component.css',
 })
 export class MovieListComponent {
-  films : Film[] = FILMS; 
+  films : Film[] =[]; 
 }

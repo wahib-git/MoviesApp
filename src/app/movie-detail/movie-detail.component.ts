@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Film, FILMS } from '../models/film';
+import { Film } from '../models/film';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { AppService } from '../sevices/app.service';
