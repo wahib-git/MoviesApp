@@ -1,53 +1,204 @@
-<div style="background-color: black; margin-top: 80px; height: 500px;">
+<div style="background-color: black; margin-top: 80px; height: 500px">
     <div class="container">
-        <h2>Mettre à jour un film</h2>
-        <form  class="film-form">
-            <div class="form-group">
-                <label for="title">Titre du film</label>
-                <input type="text" id="title"  name="title" required
-                placeholder="Titre du film">
-            </div>
-
-            <div class="form-group">
-                <label for="description">Description</label>
-                <textarea id="description"  name="description" required cols="30" rows="10" placeholder="Description du film"></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="genre">Genre</label>
-                <select id="genre"  name="genre" required>
-                    <option value="Action">Action</option>
-                    <option value="Comédie">Comédie</option>
-                    <option value="Drame">Drame</option>
-                    <option value="Science-Fiction">Science-Fiction</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="year">Année</label>
-                <input type="date" id="year"  name="year" required>
-            </div>
-
-            <div class="form-group">
-                <label for="rating">Note</label>
-                <input type="number" id="rating"  name="rating" min="0" max="5" 
-                    required
-                    placeholder="0">
-            </div>
-
-            <div class="form-group">
-                <label for="image">Image</label>
-                <input type="file" id="image"  name="image">
-            </div>
-
-            <div class="form-group">
-                <label for="trailerUrl">URL de la bande-annonce</label>
-                <input type="url" id="trailerUrl"  name="trailerUrl"
-                placeholder="Url de trailer">
-            </div>
-
-            <button type="submit" class="btn-submit">Mettre à jour le film</button>
-        </form>
+      <h2>Modifier un Film</h2>
+      <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="film-form">
+        <div class="form-group">
+          <label for="title">Titre du film</label>
+          <input
+            type="text"
+            id="title"
+            formControlName="title"
+            placeholder="Titre du film"
+            [class.is-invalid]="formGroup.controls.title.invalid"
+          />
+          <small
+            class="text-danger"
+            *ngIf="isInvalidAndTouchedOrDirty(formGroup.controls.title)"
+          >
+            <ng-container *ngIf="formGroup.controls.title.hasError('required')">
+              Le titre est requis.
+            </ng-container>
+            <ng-container *ngIf="formGroup.controls.title.hasError('minlength')">
+              Le titre doit contenir au moins 3 caractères.
+            </ng-container>
+          </small>
+        </div>
+  
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea
+            id="description"
+            name="description"
+            formControlName="description"
+            cols="30"
+            rows="10"
+            placeholder="Description du film"
+            [class.is-invalid]="formGroup.controls.description.invalid"
+          ></textarea>
+          <small
+            class="text-danger"
+            *ngIf="isInvalidAndTouchedOrDirty(formGroup.controls.description)"
+          >
+            <ng-container
+              *ngIf="formGroup.controls.description.hasError('required')"
+            >
+              La description est requise.
+            </ng-container>
+            <ng-container
+              *ngIf="formGroup.controls.description.hasError('minlength')"
+            >
+              La description doit contenir au moins 10 caractères.
+            </ng-container>
+          </small>
+        </div>
+  
+        <div class="form-group">
+          <label for="genre">Genre</label>
+          <select
+            id="genre"
+            name="genre"
+            formControlName="genre"
+            [class.is-invalid]="formGroup.controls.genre.invalid"
+          >
+            <option value="" disabled selected>Choisir un genre</option>
+            <option value="Action">Action</option>
+            <option value="Comédie">Comédie</option>
+            <option value="Drame">Drame</option>
+            <option value="Science-Fiction">Science-Fiction</option>
+          </select>
+          <small
+            class="text-danger"
+            *ngIf="isInvalidAndTouchedOrDirty(formGroup.controls.genre)"
+          >
+            <ng-container
+              *ngIf="formGroup.controls.genre.hasError('required')"
+            >
+              Le genre est requis.
+            </ng-container>
+          </small>
+        </div>
+  
+        <div class="form-group">
+          <label for="year">Année</label>
+          <input
+            type="date"
+            id="year"
+            name="year"
+            formControlName="year"
+            [class.is-invalid]="formGroup.controls.year.invalid"
+            placeholder="Année de sortie"
+          />
+          <small
+            class="text-danger"
+            *ngIf="isInvalidAndTouchedOrDirty(formGroup.controls.year)"
+          >
+            <ng-container *ngIf="formGroup.controls.year.hasError('required')">
+              L'année est requise.
+            </ng-container>
+          </small>
+        </div>
+  
+        <div class="form-group">
+          <label for="rating">Note</label>
+          <input
+            type="number"
+            id="rating"
+            name="rating"
+            formControlName="rating"
+            min="0"
+            max="10"
+            [class.is-invalid]="formGroup.controls.rating.invalid"
+            placeholder="Note sur 10"
+          />
+          <small
+            class="text-danger"
+            *ngIf="isInvalidAndTouchedOrDirty(formGroup.controls.rating)"
+          >
+            <ng-container *ngIf="formGroup.controls.rating.hasError('required')">
+              La note est requise.
+            </ng-container>
+            <ng-container *ngIf="formGroup.controls.rating.hasError('min')">
+              La note doit être supérieure ou égale à 0.
+            </ng-container>
+            <ng-container *ngIf="formGroup.controls.rating.hasError('max')">
+              La note doit être inférieure ou égale à 10.
+            </ng-container>
+          </small>
+        </div>
+  
+        <div class="form-group">
+          <label for="newImage">Nouvelle image</label>
+          <input
+            type="file"
+            id="newImage"
+            name="newImage"
+            (change)="onFileChange($event)"
+            accept="image/*" [class.is-invalid]="formGroup.controls.newImage.invalid"
+            formControlName="newImage"   
+          />
+          <small
+            class="text-danger"
+            *ngIf="isInvalidAndTouchedOrDirty(formGroup.controls.newImage)">
+              <ng-container *ngIf="formGroup.controls.newImage.hasError('required')">
+                  L'image est requise.
+              </ng-container>
+              <ng-container *ngIf="formGroup.controls.newImage.hasError('fileType')">
+                  Le fichier doit être une image (jpg, jpeg, png).
+              </ng-container>
+              <ng-container *ngIf="formGroup.controls.newImage.hasError('fileSize')">
+                  La taille de l'image doit être inférieure à 2 Mo.
+              </ng-container>
+          </small>
+        </div>
+  
+        <div class="form-group">
+          <label for="trailerUrl">URL de la bande-annonce</label>
+          <input
+            type="url"
+            id="trailerUrl"
+            name="trailerUrl"
+            formControlName="trailerUrl"
+            placeholder="Url de trailer"
+            [class.is-invalid]="formGroup.controls.trailerUrl.invalid"
+          />
+          <small
+            class="text-danger"
+            *ngIf="isInvalidAndTouchedOrDirty(formGroup.controls.trailerUrl)"
+          >
+            <ng-container
+              *ngIf="formGroup.controls.trailerUrl.hasError('required')"
+            >
+              L'URL de la bande-annonce est requise.
+            </ng-container>
+            <ng-container
+              *ngIf="formGroup.controls.trailerUrl.hasError('pattern')"
+            >
+              L'URL de la bande-annonce doit être une URL valide.
+            </ng-container>
+          </small>
+        </div>
+        <!-- a checkbox for isNew in your form-->
+        <div class="form-group">
+          <label for="isNew">coher le box si c'est nouveau</label>
+          <input
+            type="checkbox"
+            id="isNew"
+            name="isNew"
+            formControlName="isNew"
+            (change)="onCheckboxChange($event)"
+          />
+        </div>
+        <!-- <div class="form-group">
+            <label for="image actuelle">Image actuelle</label>
+            <div *ngIf="currentImageUrl">
+            <img  id="currentImage" [src]="currentImageUrl" alt="Image actuelle" width="200"
+            height="200"
+            style="max-width: 100%; object-fit: contain; border-radius: 5px; margin-bottom: 10px;" />
+            </div> 
+        </div> -->
+    
+        <button type="submit" class="btn-submit">Ajouter le film</button>
+      </form>
     </div>
-
-</div>
+  </div>
+  
