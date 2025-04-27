@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../../sevices/app.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-update-movie',
@@ -10,53 +9,23 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class UpdateMovieComponent implements OnInit {
 
-  formGroup = new FormGroup({
-    title: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    description: new FormControl('', [
-      Validators.required,
-      Validators.minLength(10),
-    ]),
-    genre: new FormControl('', [Validators.required]),
-    rating: new FormControl('', [
-      Validators.required,
-      Validators.min(0),
-      Validators.max(10),
-    ]),
-    year: new FormControl('', [Validators.required]),
-    isNew: new FormControl(false),
-    trailerUrl: new FormControl('', [
-      Validators.required,
-      Validators.pattern('https?://.+'),
-    ]),
-    newImage: new FormControl(''),
-  });
-  selectedFile: File | null = null;
-  movieId!: number;
-
-  constructor(
-    private appService: AppService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
-
+  movieId : any;
+  movie : any
+  currentImageUrl: string | null = null; 
+  selectedFile: File | null = null; 
+  constructor(private router:Router, private activatedRoute : ActivatedRoute , private movieService : AppService){}
+ 
   ngOnInit(): void {
-    this.movieId = Number(this.route.snapshot.paramMap.get('id'));
+    this.movieId = this.activatedRoute.snapshot.params['id'];
     this.loadMovieDetails();
   }
-  currentImageUrl: string | null = null;
+
   loadMovieDetails(): void {
-    this.appService.getMovieById(this.movieId).subscribe({
-      next: (movie: any) => {
-        this.formGroup.patchValue({
-          title: movie.title,
-          description: movie.description,
-          genre: movie.genre,
-          rating: movie.rating,
-          year: movie.year,
-          isNew: movie.isNew,
-          trailerUrl: movie.trailerUrl,
-        });
-        this.currentImageUrl = movie.image; 
+    this.movieService.getMovieById(this.movieId).subscribe({
+      next: (res) => {
+        this.movie = res;
+        this.currentImageUrl = res.image; 
+        console.log('Film : ', this.movie);
       },
       error: (err) => {
         console.error('Erreur lors du chargement des détails du film', err);
@@ -66,47 +35,63 @@ export class UpdateMovieComponent implements OnInit {
 
   onFileChange(event: any): void {
     if (event.target.files.length > 0) {
-      this.selectedFile = event.target.files[0];
+      this.selectedFile = event.target.files[0]; 
     } else {
       this.selectedFile = null;
     }
   }
+ 
+  onUpdate(updateForm: any): void {
+    const formData = new FormData();
 
-  onCheckboxChange(event: any): void {
-    this.formGroup.patchValue({ isNew: event.target.checked });
-  }
-  isInvalidAndTouchedOrDirty(formControl: FormControl) {
-    return formControl.invalid && (formControl.touched || formControl.dirty);
-  }
-
-
-  onSubmit(): void {
-    if (this.formGroup.valid) {
-      const formData = new FormData();
-
-      Object.keys(this.formGroup.controls).forEach((key) => {
-        if (key !== 'image') {
-          const value = this.formGroup.get(key)?.value;
-          formData.append(key, value !== null && value !== undefined ? value : '');
-        }
-      });
-
-      if (this.selectedFile) {
-        formData.append('image', this.selectedFile);
+   
+    Object.keys(updateForm.value).forEach((key) => {
+      if (key !== 'image') {
+        const value = updateForm.value[key];
+        formData.append(key, value !== null && value !== undefined ? value : '');
       }
+    });
 
-      this.appService.updateMovie(this.movieId, formData).subscribe({
-        next: (response) => {
-          console.log('Film mis à jour avec succès', response);
-          this.router.navigate(['/']);
-        },
-        error: (err) => {
-          console.error("Erreur lors de la mise à jour du film", err);
-        },
-      });
-    } else {
-      console.error('Formulaire invalide');
+    
+    if (this.selectedFile) {
+      formData.append('image', this.selectedFile);
     }
+
+    this.movieService.updateMovie(this.movieId, formData).subscribe({
+      next: (res) => {
+        alert('Film mis à jour avec succès');
+        this.router.navigate(['/admin']); 
+      },
+      error: (err) => {
+        console.error('Erreur lors de la mise à jour du film', err);
+      },
+    });
   }
+ /*  ngOnInit(){
+      this.movieId = this.activatedRoute.snapshot.params['id'];
+      console.log("Film ID : " , this.movieId);
+      this.movieService.getMovieById(this.movieId).subscribe(
+        (res) =>{
+          this.movie = res;
+          console.log("Film : " , this.movie)
+        },
+        (err) =>{
+         console.error(err)
+        },
+        
+      )
+  }
+
+  onUpdate(data :any){
+    this.movieService.updateMovie(this.movieId , data).subscribe(
+      (res) =>{
+        alert("Film mis a jour avec succés")
+      },
+      (err) =>{
+        console.error(err)
+      }
+    )
+  }
+   */
 
 }

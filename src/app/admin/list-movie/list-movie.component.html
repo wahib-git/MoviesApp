@@ -52,7 +52,7 @@
         </td>
         <td>
           <button class="edit-btn" [routerLink]="['update' , film.id]"><i class="fas fa-edit"></i></button>
-          <button class="delete-btn"><i class="fas fa-trash"></i></button>
+          <button class="delete-btn" (click)="deleteMovie(film.id)"><i class="fas fa-trash"></i></button>
         </td>
       </tr>
     </tbody>

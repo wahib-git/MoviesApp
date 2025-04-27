@@ -35,7 +35,9 @@ export class AppService {
   }
 
   // Supprimer un film par ID
-  deleteMovie(id: number): Observable<void> {
+  deleteMovie(id: number): Observable<any> {
     return this.http.delete<void>(`${this.ROOT_URL}/movies/${id}`);
   }
+
+  
 }

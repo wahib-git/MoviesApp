@@ -28,4 +28,22 @@ export class ListMovieComponent {
       // Call the service to get all movies
       this.getallMovies();
     }
+    deleteMovie(id: number) {
+      // Call the service to delete a movie
+      this.appService.deleteMovie(id).subscribe(
+        (Data: any) => {
+          console.log('Movie deleted:', Data);
+          alert("Film supprimé avec succés")
+          // Refresh the list of movies after deletion
+          this.getallMovies();
+        },
+        (error: any) => {
+          console.error('Error deleting movie:', error);
+          alert("Erreur lors de la suppression du film")
+        }
+      );
+    }
+     
+
+    
 }
