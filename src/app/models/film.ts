@@ -1,4 +1,16 @@
-export class Film {
+export interface Film {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  rating: number;
+  year: number;
+  genre: string;
+  isNew: boolean;
+  trailerUrl: string;
+}
+
+/* export class Film {
   id: number;
   title: string;
   description: string;
@@ -30,8 +42,8 @@ export class Film {
     this.isNew = isNew;
     this.trailerUrl = trailerUrl;
   }
-}
-/* export const FILMS: Film[] = [
+} 
+ export const FILMS: Film[] = [
   {
     id: 1,
     title: 'Captain America',

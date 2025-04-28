@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Film} from '../../models/film';
-import { Router } from '@angular/router';
 import { AppService } from '../../sevices/app.service';
 
 @Component({
@@ -14,9 +13,7 @@ export class ListMovieComponent {
 
   constructor( private appService: AppService ) {}
    
-  
     getallMovies() {
-      // Call the service to get all movies
        this.appService.getAllMovies().subscribe(
         (Data: any) => {
           this.films = Data;
@@ -25,16 +22,13 @@ export class ListMovieComponent {
       );
     }
     ngOnInit() {
-      // Call the service to get all movies
       this.getallMovies();
     }
     deleteMovie(id: number) {
-      // Call the service to delete a movie
       this.appService.deleteMovie(id).subscribe(
-        (Data: any) => {
-          console.log('Movie deleted:', Data);
+        () => {
+          console.log('Movie deleted');
           alert("Film supprimé avec succés")
-          // Refresh the list of movies after deletion
           this.getallMovies();
         },
         (error: any) => {

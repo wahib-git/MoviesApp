@@ -1,6 +1,7 @@
 import { Component} from '@angular/core';
 import { AppService } from '../../sevices/app.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-add-movie',
   standalone: false,
@@ -29,7 +30,7 @@ export class AddMovieComponent {
     image: new FormControl('', [Validators.required]), 
   });
 
-  constructor(private appService: AppService) {}
+  constructor(private router:Router, private appService: AppService) {}
 
   selectedFile: File | null = null; 
 
@@ -68,7 +69,9 @@ export class AddMovieComponent {
         next: (response) => {
           console.log('Film ajouté avec succès', response);
           this.formGroup.reset();
-          this.selectedFile = null; 
+          this.selectedFile = null;
+          alert('Film creé avec succès');
+          this.router.navigate(['/admin']);  
         },
         error: (err) => {
           console.error("Erreur lors de l'ajout du film", err);

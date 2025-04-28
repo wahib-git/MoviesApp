@@ -11,33 +11,24 @@ export class AppService {
 
   constructor(private http: HttpClient) {}
 
-  // Get all movies
-  getAllMovies(): Observable<any> {
-    return this.http.get(`${this.ROOT_URL}/movies`);
+  getAllMovies(): Observable<Film[]> {
+    return this.http.get<Film[]>(`${this.ROOT_URL}/movies`);
   }
 
-  // Récupérer un film par ID
   getMovieById(id: number): Observable<Film> {
     return this.http.get<Film>(`${this.ROOT_URL}/movies/${id}`);
   }
 
-  // Mettre à jour un film existant (avec ou sans nouvelle image)
   createMovie(movieData: FormData): Observable<Film> {
     return this.http.post<Film>(`${this.ROOT_URL}/movies`, movieData);
   }
 
 
-  updateMovie(
-    id: number,
-    formData: FormData
-  ): Observable<Film> {
+  updateMovie(id: number, formData: FormData): Observable<Film> {
     return this.http.put<Film>(`${this.ROOT_URL}/movies/${id}`, formData);
   }
 
-  // Supprimer un film par ID
   deleteMovie(id: number): Observable<any> {
-    return this.http.delete<void>(`${this.ROOT_URL}/movies/${id}`);
+    return this.http.delete(`${this.ROOT_URL}/movies/${id}`);
   }
-
-  
 }
