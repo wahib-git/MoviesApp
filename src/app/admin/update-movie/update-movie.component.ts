@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class UpdateMovieComponent implements OnInit {
 
   movieId : any;
-  movie : any
+  movie :any = {};
   currentImageUrl: string | null = null; 
   selectedFile: File | null = null; 
   constructor(private router:Router, private activatedRoute : ActivatedRoute , private movieService : AppService){}

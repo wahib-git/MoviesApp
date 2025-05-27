@@ -26,7 +26,7 @@ export class MovieDetailComponent {
     this.filmService.getMovieById(this.filmId).subscribe(
       (res) =>{
         this.film = res;
-        console.log("Film : " , this.film)
+        console.log("Film in movie details: " , this.film)
       },
       (err) =>{
        console.error(err)
